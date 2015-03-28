@@ -156,7 +156,7 @@ wroteflock=1
 ### setup and begin tracing
 echo nop > current_tracer
 ver=$(uname -r)
-if [[ "$ver" == 2.* || "$ver" == 3.[1-6].* ]]; then
+if [[ "$ver" != 2.6.32* && "$ver" == 2.* || "$ver" == 3.[1-6].* ]]; then
 	# rval is char *
 	kprobe='r:getnameprobe getname +0($retval):string'
 else
