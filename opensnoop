@@ -156,6 +156,13 @@ wroteflock=1
 ### setup and begin tracing
 echo nop > current_tracer
 ver=$(uname -r)
+### Check to ensure RHEL 6.4+ kernel in use
+if [[ "$ver" == 2.6.32* ]]; then
+	rel=$(echo $ver | awk -F'-' '{print $2}' | awk -F'.' '{print $1}')
+	if [[ "$rel" < 358 ]]; then
+		edie "ERROR: Kernel version 2.6.32-358.el6 (RHEL 6.4) or higher needed. Exiting."
+	fi
+fi
 if [[ "$ver" != 2.6.32-431* && "$ver" != 2.6.32-504* && "$ver" == 2.* || "$ver" == 3.[1-6].* ]]; then
 	# rval is char *
 	kprobe='r:getnameprobe getname +0($retval):string'
