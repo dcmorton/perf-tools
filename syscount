@@ -164,8 +164,14 @@ if (( opt_count && opt_verbose )); then
 	exit
 fi
 
+### raw_syscalls not available on RHEL 6
+ver=$(uname -r)
+if [[ "$ver" == 2.6.32* ]]; then
+	tp="-e syscalls:sys_enter"
+else
+	tp="-e raw_syscalls:sys_enter"
+fi
 ### execute process name mode
-tp="-e raw_syscalls:sys_enter"
 if (( write_workaround )); then
 	sh -c "perf record $tp --filter 'common_pid != '\$\$ $cpus $cmd"
 else
