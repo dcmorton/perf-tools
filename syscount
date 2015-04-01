@@ -165,7 +165,7 @@ if (( opt_count && opt_verbose )); then
 fi
 
 ### raw_syscalls not available on RHEL 6
-if [[ $(perf list syscalls:sys_enter | wc -l) == 0 ]]; then
+if [[ $(perf list raw_syscalls:sys_enter | wc -l) == 0 ]]; then
 	tp="-e syscalls:sys_enter"
 else
 	tp="-e raw_syscalls:sys_enter"
