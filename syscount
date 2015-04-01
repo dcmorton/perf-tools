@@ -126,7 +126,7 @@ ulimit -n 32768		# often needed
 ### execute syscall name mode
 if (( opt_count && ! opt_verbose )); then
 	: ${cmd:=sleep 999999}
-	out=$(perf stat $opts -e 'syscalls:sys_enter_*' $cpus $cmd)
+	out=$(perf stat $opts -e 'syscalls:sys_enter_*' $cpus $cmd 2>/dev/null)
 	printf "%-17s %8s\n" "SYSCALL" "COUNT"
 	echo "$out" | awk '
 	$1 && $2 ~ /syscalls:/ {
