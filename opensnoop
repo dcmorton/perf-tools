@@ -160,7 +160,7 @@ ver=$(uname -r)
 if [[ "$ver" == 2.6.32* && ! -e kprobe_events ]]; then
     edie "ERROR: Kernel version 2.6.32-358.el6 (RHEL 6.4) or higher needed. Exiting."
 fi
-if [[ "$ver" != 2.6.32-431* && "$ver" != 2.6.32-504* && "$ver" == 2.* || "$ver" == 3.[1-6].* ]]; then
+if [[ "$ver" != 2.6.32-431* && "$ver" != 2.6.32-504* && "$ver" != 2.6.32-573* && "$ver" == 2.* || "$ver" == 3.[1-6].* ]]; then
 	# rval is char *
 	kprobe='r:getnameprobe getname +0($retval):string'
 else
